@@ -12,7 +12,7 @@ code {
     monospace;
 }
 .text-gradient {
-  background: linear-gradient(to right, #135D66, #22A6B6);
+  background: linear-gradient(to left, #135D66, #22A6B6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   
