@@ -113,7 +113,7 @@ const Login = () => {
               <Col xs={12} md={6}>
                 <Form.Group controlId="formPassword">
                   <Form.Label className="text-light">كلمة المرور</Form.Label>
-                  <div className="input-group">
+                  <div>
                     <span
                       className="input-group-text"
                       onClick={togglePasswordVisibility}
@@ -141,7 +141,7 @@ const Login = () => {
               <Col xs={12} md={6}>
                 <Form.Group controlId="formConfirmPassword">
                   <Form.Label className="text-light">تأكيد كلمة المرور</Form.Label>
-                  <div className="input-group">
+                  <div>
                     <span
                       className="input-group-text"
                       onClick={toggleConfirmPasswordVisibility}
