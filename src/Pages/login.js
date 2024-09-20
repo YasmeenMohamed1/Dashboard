@@ -27,7 +27,7 @@ const Login = () => {
             alt="Logo"
             style={{ width: "100%", height: "auto", maxWidth: "505px", marginBottom: "20px" }}
           />
-          <h2 className="text-gradient">
+          <h2 className="text-gradient" "style={{ textAlign: "right" }}>
             سواء كنت شركة كبيرة أو صغيرة، يتيح لك تطبيقنا إدارة عمليات الشحن بسهولة وكفاءة
           </h2>
         </Col>
@@ -39,8 +39,8 @@ const Login = () => {
           style={{
             padding: "40px",
             background: "#135D66",
-            borderTopRightRadius: "30px", // حواف دائرية في الجزء العلوي الأيمن
-            borderBottomRightRadius: "30px", // حواف دائرية في الجزء السفلي الأيمن
+            borderTopRightRadius: "30px", 
+            borderBottomRightRadius: "30px",
           }}
         >
           <h2 className="text-light">إنشاء حساب جديد</h2>
