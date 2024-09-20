@@ -6,9 +6,63 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [city, setCity] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [email, setEmail] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errors, setErrors] = useState({
+    passError: "",
+    confirmPassError: "",
+    phoneError: "",
+    companyNameError: "",
+    cityError: "",
+  });
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
   const toggleConfirmPasswordVisibility = () => setShowConfirmPassword(!showConfirmPassword);
+
+  const validateInputs = () => {
+    let valid = true;
+    const newErrors = { passError: "", confirmPassError: "", phoneError: "", companyNameError: "", cityError: "" };
+
+    if (!companyName) {
+      newErrors.companyNameError = 'اسم الشركة مطلوب';
+      valid = false;
+    }
+
+    if (!city) {
+      newErrors.cityError = 'المدينة مطلوبة';
+      valid = false;
+    }
+
+    if (!phone || phone.length <= 8 || !phone.startsWith('2')) {
+      newErrors.phoneError = 'يوجد خطأ في رقم الجوال';
+      valid = false;
+    }
+
+    if (password.length < 6) {
+      newErrors.passError = "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل.";
+      valid = false;
+    }
+
+    if (password !== confirmPassword) {
+      newErrors.confirmPassError = "كلمة المرور وتأكيد كلمة المرور غير متطابقتان.";
+      valid = false;
+    }
+
+    setErrors(newErrors);
+    return valid;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!validateInputs()) return;
+
+    // تابع لإرسال البيانات هنا
+    console.log("تم إنشاء الحساب بنجاح!");
+  };
 
   return (
     <Container fluid style={{ height: "100vh" }}>
@@ -27,7 +81,7 @@ const Login = () => {
             alt="Logo"
             style={{ width: "100%", height: "auto", maxWidth: "505px" }}
           />
-          <h2 className="text-gradient"style={{ textAlign: "right" }}>
+          <h2 className="text-gradient" style={{ textAlign: "right" }}>
             سواء كنت شركة كبيرة أو صغيرة، يتيح لك تطبيقنا إدارة عمليات الشحن بسهولة وكفاءة
           </h2>
         </Col>
@@ -39,21 +93,20 @@ const Login = () => {
           style={{
             padding: "40px",
             background: "#135D66",
-            borderTopRightRadius: "30px", 
-            borderBottomRightRadius: "30px", 
+            borderTopRightRadius: "30px",
+            borderBottomRightRadius: "30px",
           }}
         >
           <h2 className="text-light">إنشاء حساب جديد</h2>
-          <Form style={{ width: "100%", maxWidth: "500px" }}>
+          <Form style={{ width: "100%", maxWidth: "500px" }} onSubmit={handleSubmit}>
             <img
               src={logo}
               alt="Logo"
               style={{ width: "80%", height: "auto", maxWidth: "250px" }}
-              
             />
             <Row className="mb-3">
               <Col xs={12} md={6}>
-                <Form.Group controlId="formCompanyName" >
+                <Form.Group controlId="companyName">
                   <Form.Label className="text-light">اسم الشركة</Form.Label>
                   <Form.Control
                     style={{
@@ -61,12 +114,15 @@ const Login = () => {
                       borderColor: "#8AB7BD",
                     }}
                     type="text"
-                    required
+                    value={companyName}
+                    onChange={(e) => setCompanyName(e.target.value)}
+                  
                   />
+                  <p className="text-danger">{errors.companyNameError}</p>
                 </Form.Group>
               </Col>
               <Col xs={12} md={6}>
-                <Form.Group controlId="formPhone">
+                <Form.Group controlId="phone">
                   <Form.Label className="text-light">الجوال</Form.Label>
                   <Form.Control
                     style={{
@@ -74,15 +130,18 @@ const Login = () => {
                       borderColor: "#8AB7BD",
                     }}
                     type="tel"
-                    required
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                   
                   />
+                  <p className="text-danger">{errors.phoneError}</p>
                 </Form.Group>
               </Col>
             </Row>
 
             <Row className="mb-3">
               <Col xs={12} md={6}>
-                <Form.Group controlId="formEmail">
+                <Form.Group controlId="email">
                   <Form.Label className="text-light">البريد الالكتروني</Form.Label>
                   <Form.Control
                     style={{
@@ -90,12 +149,14 @@ const Login = () => {
                       borderColor: "#8AB7BD",
                     }}
                     type="email"
-                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                   
                   />
                 </Form.Group>
               </Col>
               <Col xs={12} md={6}>
-                <Form.Group controlId="formCity">
+                <Form.Group controlId="city">
                   <Form.Label className="text-light">المدينة</Form.Label>
                   <Form.Control
                     style={{
@@ -103,8 +164,11 @@ const Login = () => {
                       borderColor: "#8AB7BD",
                     }}
                     type="text"
-                    required
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    
                   />
+                  <p className="text-danger">{errors.cityError}</p>
                 </Form.Group>
               </Col>
             </Row>
@@ -120,21 +184,21 @@ const Login = () => {
                       style={{
                         cursor: 'pointer',
                         backgroundColor: "#8AB7BD",
-                      
                       }}
                     >
-                    <Form.Control
-                      style={{
-                        backgroundColor: "#8AB7BD",
-                        borderColor: "#8AB7BD",
-                      
-                      }}
-                      type={showPassword ? "text" : "password"}
-                      required
-                    />
-                    
+                      <Form.Control
+                        style={{
+                          backgroundColor: "#8AB7BD",
+                          borderColor: "#8AB7BD",
+                        }}
+                        type={showPassword ? "text" : "password"}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        
+                      />
                       {showPassword ? <FaEyeSlash /> : <FaEye />}
                     </span>
+                    <p className="text-danger">{errors.passError}</p>
                   </div>
                 </Form.Group>
               </Col>
@@ -149,21 +213,21 @@ const Login = () => {
                         cursor: 'pointer',
                         border: "none",
                         backgroundColor: "#8AB7BD",
-                       
                       }}
                     >
-                    <Form.Control
-                      style={{
-                        backgroundColor: "#8AB7BD",
-                        borderColor: "#8AB7BD",
-
-                      }}
-                      type={showConfirmPassword ? "text" : "password"}
-                      required
-                    />
-                    
+                      <Form.Control
+                        style={{
+                          backgroundColor: "#8AB7BD",
+                          borderColor: "#8AB7BD",
+                        }}
+                        type={showConfirmPassword ? "text" : "password"}
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        
+                      />
                       {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
                     </span>
+                    <p className="text-danger">{errors.confirmPassError}</p>
                   </div>
                 </Form.Group>
               </Col>
