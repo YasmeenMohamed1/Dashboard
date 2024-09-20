@@ -25,9 +25,9 @@ const Login = () => {
           <img
             src={logo}
             alt="Logo"
-            style={{ width: "100%", height: "auto", maxWidth: "505px"}}
+            style={{ width: "100%", height: "auto", maxWidth: "505px" }}
           />
-          <h2 className="text-gradient" "style={{ textAlign: "right" }}>
+          <h2 className="text-gradient"style={{ textAlign: "right" }}>
             سواء كنت شركة كبيرة أو صغيرة، يتيح لك تطبيقنا إدارة عمليات الشحن بسهولة وكفاءة
           </h2>
         </Col>
@@ -40,7 +40,7 @@ const Login = () => {
             padding: "40px",
             background: "#135D66",
             borderTopRightRadius: "30px", 
-            borderBottomRightRadius: "30px",
+            borderBottomRightRadius: "30px", 
           }}
         >
           <h2 className="text-light">إنشاء حساب جديد</h2>
@@ -48,11 +48,12 @@ const Login = () => {
             <img
               src={logo}
               alt="Logo"
-              style={{ width: "100%", height: "auto", maxWidth: "300px", marginBottom: "20px" }}
+              style={{ width: "80%", height: "auto", maxWidth: "250px" }}
+              
             />
-            <Row>
+            <Row className="mb-3">
               <Col xs={12} md={6}>
-                <Form.Group controlId="formCompanyName">
+                <Form.Group controlId="formCompanyName" >
                   <Form.Label className="text-light">اسم الشركة</Form.Label>
                   <Form.Control
                     style={{
@@ -79,7 +80,7 @@ const Login = () => {
               </Col>
             </Row>
 
-            <Row>
+            <Row className="mb-3">
               <Col xs={12} md={6}>
                 <Form.Group controlId="formEmail">
                   <Form.Label className="text-light">البريد الالكتروني</Form.Label>
@@ -108,7 +109,7 @@ const Login = () => {
               </Col>
             </Row>
 
-            <Row>
+            <Row className="mb-3">
               <Col xs={12} md={6}>
                 <Form.Group controlId="formPassword">
                   <Form.Label className="text-light">كلمة المرور</Form.Label>
