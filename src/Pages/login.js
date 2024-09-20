@@ -59,8 +59,6 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validateInputs()) return;
-
-    // تابع لإرسال البيانات هنا
     console.log("تم إنشاء الحساب بنجاح!");
   };
 
