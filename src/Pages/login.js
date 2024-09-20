@@ -25,7 +25,7 @@ const Login = () => {
           <img
             src={logo}
             alt="Logo"
-            style={{ width: "100%", height: "auto", maxWidth: "505px", marginBottom: "20px" }}
+            style={{ width: "100%", height: "auto", maxWidth: "505px"}}
           />
           <h2 className="text-gradient" "style={{ textAlign: "right" }}>
             سواء كنت شركة كبيرة أو صغيرة، يتيح لك تطبيقنا إدارة عمليات الشحن بسهولة وكفاءة
