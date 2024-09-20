@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import logo from "../assets/logo.png";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
+  const toggleConfirmPasswordVisibility = () => setShowConfirmPassword(!showConfirmPassword);
+
   return (
     <Container fluid style={{ height: "100vh" }}>
       <Row style={{ height: "100%" }}>
         <Col
           md={4}
-          className="d-none d-md-flex flex-column justify-content-center align-items-center" 
+          className="d-none d-md-flex flex-column justify-content-center align-items-center"
           style={{
-            backgroundColor: "#f0f0f0",
+            backgroundColor: "white",
             textAlign: "center",
             padding: "20px",
           }}
@@ -32,6 +39,8 @@ const Login = () => {
           style={{
             padding: "40px",
             background: "#135D66",
+            borderTopRightRadius: "30px", // حواف دائرية في الجزء العلوي الأيمن
+            borderBottomRightRadius: "30px", // حواف دائرية في الجزء السفلي الأيمن
           }}
         >
           <h2 className="text-light">إنشاء حساب جديد</h2>
@@ -103,33 +112,64 @@ const Login = () => {
               <Col xs={12} md={6}>
                 <Form.Group controlId="formPassword">
                   <Form.Label className="text-light">كلمة المرور</Form.Label>
-                  <Form.Control
-                    style={{
-                      backgroundColor: "#8AB7BD",
-                      borderColor: "#8AB7BD",
-                    }}
-                    type="password"
-                    required
-                  />
+                  <div className="input-group">
+                    <span
+                      className="input-group-text"
+                      onClick={togglePasswordVisibility}
+                      style={{
+                        cursor: 'pointer',
+                        backgroundColor: "#8AB7BD",
+                      
+                      }}
+                    >
+                    <Form.Control
+                      style={{
+                        backgroundColor: "#8AB7BD",
+                        borderColor: "#8AB7BD",
+                      
+                      }}
+                      type={showPassword ? "text" : "password"}
+                      required
+                    />
+                    
+                      {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </span>
+                  </div>
                 </Form.Group>
               </Col>
               <Col xs={12} md={6}>
                 <Form.Group controlId="formConfirmPassword">
                   <Form.Label className="text-light">تأكيد كلمة المرور</Form.Label>
-                  <Form.Control
-                    style={{
-                      backgroundColor: "#8AB7BD",
-                      borderColor: "#8AB7BD",
-                    }}
-                    type="password"
-                    required
-                  />
+                  <div className="input-group">
+                    <span
+                      className="input-group-text"
+                      onClick={toggleConfirmPasswordVisibility}
+                      style={{
+                        cursor: 'pointer',
+                        border: "none",
+                        backgroundColor: "#8AB7BD",
+                       
+                      }}
+                    >
+                    <Form.Control
+                      style={{
+                        backgroundColor: "#8AB7BD",
+                        borderColor: "#8AB7BD",
+
+                      }}
+                      type={showConfirmPassword ? "text" : "password"}
+                      required
+                    />
+                    
+                      {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                    </span>
+                  </div>
                 </Form.Group>
               </Col>
             </Row>
 
             <div className="text-center mt-5">
-              <Button className="px-5 bg-light"style={{ color: "#135D66", }} type="submit">
+              <Button className="px-5 bg-light" style={{ color: "#135D66" }} type="submit">
                 إنشاء الحساب
               </Button>
             </div>
