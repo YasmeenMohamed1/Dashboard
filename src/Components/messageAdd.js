@@ -1,6 +1,6 @@
 import React from 'react';
-import { FaCheckCircle, FaTimes } from 'react-icons/fa';
-
+import {FaTimes } from 'react-icons/fa';
+import Add from "../assets/add.png";
 
 const MessageAdd = ({onClose}) => {
   
@@ -17,6 +17,8 @@ const MessageAdd = ({onClose}) => {
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
                 zIndex: 1000,
                 textAlign: 'center',
+                 width: "500px",
+                height:"250px"
               }}
             >
               
@@ -32,7 +34,11 @@ const MessageAdd = ({onClose}) => {
                   onClick={onClose}
                 />
     
-                <FaCheckCircle size={50} color="#ECF2FF" />
+                <img
+            src={Add}
+            alt="Add"
+            style={{ width: "20%", height: "auto", maxWidth: "505px" }}
+          />
                 
                 <h4 className="my-3">إضافة الشحنة كملف  اكسيل</h4>
                 
