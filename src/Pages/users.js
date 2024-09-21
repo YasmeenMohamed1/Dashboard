@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAd, faFileExcel, faFilePdf, faPlus } from "@fortawesome/free-solid-svg-icons";
-import jsPDF from "jspdf";
+import { faFileExcel, faPlus } from "@fortawesome/free-solid-svg-icons";
 import "jspdf-autotable";
 import * as XLSX from "xlsx";
 import { Link } from "react-router-dom";
+import MessageSuccess from "../Components/messageSucess";
 
 const Users = () => {
   const shipments = Array.from({ length: 25 }, (_, index) => ({
@@ -20,11 +20,11 @@ const Users = () => {
   }));
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const rowsPerPage = 9;
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = shipments.slice(indexOfFirstRow, indexOfLastRow);
-
   const totalPages = Math.ceil(shipments.length / rowsPerPage);
 
   const exportToExcel = () => {
@@ -54,6 +54,7 @@ const Users = () => {
     const ws = XLSX.utils.aoa_to_sheet(sheetData);
     XLSX.utils.book_append_sheet(wb, ws, "Shipments");
     XLSX.writeFile(wb, "المستخدمون.xlsx");
+    setShowSuccessMessage(true);
   };
 
   return (
@@ -85,6 +86,7 @@ const Users = () => {
               إصدار كملف اكسيل <FontAwesomeIcon icon={faFileExcel} />
             </button>
           </div>
+          {showSuccessMessage && <MessageSuccess onClose={() => setShowSuccessMessage(false)} />}
           <div
             className="box p-3"
             style={{ backgroundColor: "#fff", padding: "20px" }}
