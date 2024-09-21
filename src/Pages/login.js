@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import logo from "../assets/logo.png";
+import logo2 from "../assets/logoColor.png";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
@@ -75,7 +76,7 @@ const Login = () => {
           }}
         >
           <img
-            src={logo}
+            src={logo2}
             alt="Logo"
             style={{ width: "100%", height: "auto", maxWidth: "505px" }}
           />
