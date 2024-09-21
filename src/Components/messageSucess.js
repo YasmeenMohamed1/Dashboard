@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaCheckCircle, FaTimes } from 'react-icons/fa';
+import Sucess from "../assets/right.png";
 
 
 const messageSucess = ({onClose}) => {
@@ -17,6 +18,8 @@ const messageSucess = ({onClose}) => {
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
                 zIndex: 1000,
                 textAlign: 'center',
+                width: "500px",
+                height:"250px"
               }}
             >
               
@@ -31,8 +34,12 @@ const messageSucess = ({onClose}) => {
                   }}
                   onClick={onClose}
                 />
-    
-                <FaCheckCircle size={50} color="#ECF2FF" />
+
+    <img
+            src={Sucess}
+            alt="Sucess"
+            style={{ width: "20%", height: "auto", maxWidth: "505px" }}
+          />
                 
                 <h4 className="my-3">إصدار الملف بنجاح</h4>
                 
