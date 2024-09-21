@@ -294,6 +294,7 @@ import { faFileExcel, faPlus } from "@fortawesome/free-solid-svg-icons";
 import * as XLSX from "xlsx";
 import { Button } from "react-bootstrap";
 import MessageAdd from "../Components/messageAdd";
+import MessageSuccess from "../Components/messageSucess";
 
 const DeliveryShipment = () => {
   const shipments = Array.from({ length: 25 }, (_, index) => ({
@@ -332,6 +333,7 @@ const DeliveryShipment = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [activeTab, setActiveTab] = useState("pending");
   const [showAddPopup, setShowAddPopup] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const rowsPerPage = 9;
 
   const data =
@@ -373,6 +375,7 @@ const DeliveryShipment = () => {
     const ws = XLSX.utils.aoa_to_sheet(sheetData);
     XLSX.utils.book_append_sheet(wb, ws, "Shipments");
     XLSX.writeFile(wb, "المستخدمون.xlsx");
+    setShowSuccessMessage(true);
   };
 
   return (
@@ -389,7 +392,7 @@ const DeliveryShipment = () => {
               إصدار كملف اكسيل <FontAwesomeIcon icon={faFileExcel} />
             </button>
           </div>
-
+          {showSuccessMessage && <MessageSuccess onClose={() => setShowSuccessMessage(false)} />}
           {showAddPopup && <MessageAdd onClose={() => setShowAddPopup(false)} />}
 
           <div className="box p-3" style={{ backgroundColor: "#fff", padding: "20px" }}>
