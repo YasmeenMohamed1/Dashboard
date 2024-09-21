@@ -19,6 +19,17 @@ code {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.text-gradientt {
+  background: linear-gradient(to right, #135D66, #22A6B6);
+}
+.active-button {
+  border-radius: 50px !important;
+  background-image: linear-gradient(180deg, #135D66 0%, #22A6B6 100%);
+  color: white !important;
+}
+
+
+
 .alert-overlay {
   position: fixed;
   top: 0;
