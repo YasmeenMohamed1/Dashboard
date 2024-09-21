@@ -5,6 +5,7 @@ import { faFileExcel, faFilePdf } from "@fortawesome/free-solid-svg-icons";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import * as XLSX from "xlsx";
+import MessageSuccess from "../Components/messageSucess";
 
 const Finance = () => {
   const shipments = Array.from({ length: 25 }, (_, index) => ({
@@ -20,6 +21,7 @@ const Finance = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 9;
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = shipments.slice(indexOfFirstRow, indexOfLastRow);
@@ -53,6 +55,7 @@ const Finance = () => {
       ]),
     });
     doc.save("shipments.pdf");
+    setShowSuccessMessage(true);
   };
 
   const exportToExcel = () => {
@@ -82,6 +85,7 @@ const Finance = () => {
     const ws = XLSX.utils.aoa_to_sheet(sheetData);
     XLSX.utils.book_append_sheet(wb, ws, "Shipments");
     XLSX.writeFile(wb, "shipments.xlsx");
+    setShowSuccessMessage(true);
   };
 
   return (
@@ -109,6 +113,7 @@ const Finance = () => {
               إصدار كملف PDF <FontAwesomeIcon icon={faFilePdf} />
             </button>
           </div>
+          {showSuccessMessage && <MessageSuccess onClose={() => setShowSuccessMessage(false)} />}
           <div
             className="box p-3"
             style={{ backgroundColor: "#fff", padding: "20px" }}
