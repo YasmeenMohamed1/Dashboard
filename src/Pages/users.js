@@ -27,35 +27,6 @@ const Users = () => {
 
   const totalPages = Math.ceil(shipments.length / rowsPerPage);
 
-  const exportToPDF = () => {
-    const doc = new jsPDF();
-    doc.autoTable({
-      head: [
-        [
-          "رقم الشحنة",
-          "المستلم",
-          "جوال المستلم",
-          "عنوان المستلم",
-          "المرسل",
-          "جوال المرسل",
-          "عنوان المرسل",
-          "قيمة الشحنة",
-        ],
-      ],
-      body: currentRows.map((row) => [
-        row.id,
-        row.recipient,
-        row.recipientPhone,
-        row.recipientAddress,
-        row.sender,
-        row.senderPhone,
-        row.senderAddress,
-        row.value,
-      ]),
-    });
-    doc.save("shipments.pdf");
-  };
-
   const exportToExcel = () => {
     const sheetData = [
       [
