@@ -190,7 +190,7 @@ const Dashboard = () => {
                   <button
                     key={index + 1}
                     className={`btn ${
-                      currentPage === index + 1 ? "text-gradient" : "btn"
+                      currentPage === index + 1 ? "gradient" : "btn"
                     } mx-1`}
                     onClick={() => setCurrentPage(index + 1)}
                   >
