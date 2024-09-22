@@ -1,5 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Line } from "react-chartjs-2";
+import BarChart from "../Components/barChart";
+import Pie from "../Components/pieChart";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  PointElement,
+  LineElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { MdMargin } from "react-icons/md";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  PointElement,
+  LineElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const Dashboard = () => {
   const shipments = Array.from({ length: 25 }, (_, index) => ({
@@ -18,16 +46,16 @@ const Dashboard = () => {
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = shipments.slice(indexOfFirstRow, indexOfLastRow);
-
   const totalPages = Math.ceil(shipments.length / rowsPerPage);
+
   return (
-    <div className="container-fluid" style={{ height: "100vh"}}>
+    <div className="container-fluid" style={{ height: "100vh" }}>
       <div className="row">
         <nav className="col-12 col-md-2 navbar bg-dark"></nav>
 
         <div
           className="col-12 col-md-10 p-4"
-          style={{ height: "100vh", backgroundColor: "#F5F7FA" }}
+          style={{ backgroundColor: "#F5F7FA" }}
         >
           <div className="row my-5 d-flex justify-content-between">
             {[
@@ -36,63 +64,45 @@ const Dashboard = () => {
               "الشحنات تم التسليم",
               "الشحنات المرتجعة",
             ].map((title, index) => (
-              <div
-                key={index}
-                className="col-6 col-md-2"
-                style={{ backgroundColor: "#fff" }}
-              >
-                <div className="box p-3 mb-3">
-                  <div className="stat-box d-flex justify-content-between">
-                    <span>{title}</span>
-                    <span
-                      className="dot"
-                      style={{
-                        backgroundColor:
-                          index === 0
-                            ? "green"
-                            : index === 1
-                            ? "blue"
-                            : index === 2
-                            ? "red"
-                            : "orange",
-                      }}
-                    ></span>
+              <div key={index} className="col-6 col-md-3 mb-3">
+                <div
+                  className="box p-3"
+                  style={{ backgroundColor: "#fff", textAlign: "center" }}
+                >
+                  <div className="d-flex justify-content-between align-items-center">
+                    <h3 style={{ marginRight: "10px" }}>{title}</h3>
                   </div>
                   <h3>{[150, 120, 180, 90][index]}</h3>
-                  <div
-                    className="chart"
-                    style={{
-                      backgroundColor:
-                        index === 0
-                          ? "green"
-                          : index === 1
-                          ? "blue"
-                          : index === 2
-                          ? "red"
-                          : "orange",
-                      height: "10px",
-                    }}
-                  ></div>
                 </div>
               </div>
             ))}
           </div>
 
           <div className="row my-4">
-            <div className="col-12 col-md-7">
+            <div className="col-12 col-md-7 mb-4">
               <h4>الشحنات آخر الأسبوع</h4>
               <div
-                className="box mb-3"
-                style={{ height: "300px", backgroundColor: "#fff" }}
-              ></div>
+                className="box"
+                style={{
+                  backgroundColor: "#fff",
+                  padding: "20px",
+                  height: "100%",
+                }}
+              >
+                <BarChart />
+              </div>
             </div>
-            <div className="col-12 col-md-4">
+            <div className="col-12 col-md-5 mb-4">
               <h4>الشحنات</h4>
               <div
-                className="box p-3"
-                style={{ height: "300px", backgroundColor: "#fff" }}
+                className="box"
+                style={{
+                  backgroundColor: "#fff",
+                  padding: "20px",
+                  height: "100%",
+                }}
               >
-                <p>معلومات إضافية هنا...</p>
+                <Pie/>
               </div>
             </div>
           </div>
