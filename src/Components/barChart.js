@@ -16,14 +16,13 @@ const BarChart = () => {
     datasets: [
       {
         label: "الشحنات المحوله",
-        backgroundColor: "rgba(194, 116, 161, 0.5)",
-        borderColor: "rgb(194, 116, 161)",
+        backgroundColor: "#1814F3",
+        
         data: [65, 59, 90, 81, 56, 55, 40],
       },
       {
         label: "الشحنات تم التسليم",
-        backgroundColor: "rgba(71, 225, 167, 0.5)",
-        borderColor: "rgb(71, 225, 167)",
+        backgroundColor: "#16DBCC",
         data: [28, 48, 40, 19, 96, 27, 100],
       },
     ],
